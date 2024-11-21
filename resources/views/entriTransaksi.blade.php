@@ -65,45 +65,37 @@
         <table class="w-full bg-gray-800 rounded-lg overflow-hidden">
             <thead class="bg-gray-700">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">NISN</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nama</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Alamat</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">No Telepon
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Kode Kelas
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Username</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Password</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID Transaksi</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID Pesanan</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Total</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Bayar</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-700">
                 {{-- @forelse ($siswa as $siswas)
                     <tr class="hover:bg-gray-700 transition-colors duration-200">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->nisn }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->nama }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->alamat }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->no_telp }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->kode_kelas }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->username }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->id_transaksi }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->id_pesanan }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->total }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->bayar }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                            <a href="{{ route('pages.siswa.edit', $siswas->nisn) }}">
+                            <a href="{{ route('pages.siswa.edit', $siswas->id_transaksi) }}">
                                 <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2">
                                     <i class="fa-solid fa-pencil"></i>
                                 </button>
                             </a>
-                            <button onclick="openDeleteModal('{{ $siswas->nisn }}', '{{ $siswas->nama }}')" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md mr-2">
+                            <button onclick="openDeleteModal('{{ $siswas->id_transaksi }}', '{{ $siswas->id_pesanan }}')" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md mr-2">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>
                 @empty
-                    <tr>
-                        <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-center">Tidak ada
-                            data siswa</td>
-                    </tr>
                 @endforelse --}}
+                <tr>
+                    <td colspan="5" class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-center">Tidak ada
+                        data transaksi</td>
+                </tr>
             </tbody>
         </table>
 

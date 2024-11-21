@@ -18,111 +18,65 @@
 @endsection
 
 @section('edit-tambah')
-    {{-- <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-        @if(session('success'))
-            <div class="bg-green-500 text-white p-4 rounded-md mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            @if(session('success'))
+                <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        @if($errors->any())
-            <div class="bg-red-500 text-white p-4 rounded-md mb-4">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
+            @if($errors->any())
+                <div class="bg-red-500 text-white p-4 rounded-md mb-4">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        <form action="" method="POST">
-            @csrf
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="nisn">
-                        NISN
-                    </label>
-                    <input
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="nisn" name="nisn" type="text" placeholder="22200193716" required>
+            <form action="" method="POST">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="id_menu">
+                            ID Menu
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="id_menu" name="id_menu" type="number" placeholder="" required readonly>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="nama_menu">
+                            Nama Menu
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="nama_menu" name="nama_menu" type="text" placeholder="Basreng 1KG" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="harga">
+                            Harga
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="harga" name="harga" type="text" placeholder="Rp 30.000" required>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="nama">
-                        Nama
-                    </label>
-                    <input
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="nama" name="nama" type="text" placeholder="John Doe" required>
+                <div class="flex items-center gap-4 mt-8">
+                    <button
+                        class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                        type="submit">
+                        Simpan Data
+                    </button>
+                    <button
+                        class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                        type="reset">
+                        Mulai Ulang
+                    </button>
                 </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="alamat">
-                        Alamat
-                    </label>
-                    <input
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="alamat" name="alamat" type="text" placeholder="Gang Mawar III" required>
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="no_telp">
-                        No Telepon
-                    </label>
-                    <input
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="no_telp" name="no_telp" type="number" placeholder="081234567890" required>
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="kode_kelas">
-                        Kode Kelas
-                    </label>
-                    <select
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="kode_kelas" name="kode_kelas" required>
-                        <option value="">Pilih Kelas</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="role">
-                        Role
-                    </label>
-                    <select
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="role" name="role" required>
-                        <option value="" disabled selected>Pilih Role</option>
-                        <option value="Siswa">Siswa</option>
-                        <option value="Petugas">Petugas</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="username">
-                        Username
-                    </label>
-                    <input
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="username" name="username" type="text" placeholder="JohnDoe123" required>
-                </div>
-                <div>
-                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="password">
-                        Password
-                    </label>
-                    <input
-                        class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
-                        id="password" type="password" name="password" placeholder="********" required>
-                </div>
-            </div>
-            <div class="flex items-center gap-4 mt-8">
-                <button
-                    class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-                    type="submit">
-                    Simpan Data
-                </button>
-                <button
-                    class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-                    type="reset">
-                    Mulai Ulang
-                </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 @endsection
 
@@ -174,45 +128,35 @@
         <table class="w-full bg-gray-800 rounded-lg overflow-hidden">
             <thead class="bg-gray-700">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">NISN</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nama</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Alamat</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">No Telepon
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Kode Kelas
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Username</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Password</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID Menu</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nama Menu</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Harga</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-700">
                 {{-- @forelse ($siswa as $siswas)
                     <tr class="hover:bg-gray-700 transition-colors duration-200">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->nisn }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->nama }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->alamat }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->no_telp }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->kode_kelas }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->username }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300"></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->id_menu }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->nama_menu }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->harga }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                            <a href="{{ route('pages.siswa.edit', $siswas->nisn) }}">
+                            <a href="{{ route('pages.siswa.edit', $siswas->id_menu) }}">
                                 <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2">
                                     <i class="fa-solid fa-pencil"></i>
                                 </button>
                             </a>
-                            <button onclick="openDeleteModal('{{ $siswas->nisn }}', '{{ $siswas->nama }}')" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md mr-2">
+                            <button onclick="openDeleteModal('{{ $siswas->id_menu }}', '{{ $siswas->nama_menu }}')" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md mr-2">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
-                    </tr>
-                @empty
+                    </tr> --}}
+                {{-- @empty --}}
                     <tr>
-                        <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-center">Tidak ada
-                            data siswa</td>
+                        <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-center">Tidak ada
+                            data barang</td>
                     </tr>
-                @endforelse --}}
+                {{-- @endforelse --}}
             </tbody>
         </table>
 

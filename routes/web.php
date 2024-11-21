@@ -6,19 +6,17 @@ use App\Http\Controllers\EntriMejaController;
 use App\Http\Controllers\EntriBarangController;
 use App\Http\Controllers\EntriOrderController;
 use App\Http\Controllers\EntriTransaksiController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\LaporanController;
 
 Route::get('login',[AdminController::class, 'login'])->name('login');
 Route::post('login',[AdminController::class, 'cekUser']);
-Route::get('logout',[AdminController::class, 'logout'])->name('logout');
+Route::post('logout',[AdminController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:user')->prefix('dashboard')->group(function() {
-    Route::get('/', [AdminController::class, 'dashboardAdmin']);
-    Route::get('/Meja', [EntriMejaController::class, 'index']);
-    Route::get('/Barang', [EntriBarangController::class, 'index']);
-    Route::get('/Order', [EntriOrderController::class, 'index']);
-    Route::get('/Transaksi', [EntriTransaksiController::class, 'index']);
+    Route::get('/', [AdminController::class, 'dashboardAdmin'])->name('dashboard');
+    Route::get('/meja', [EntriMejaController::class, 'index'])->name('meja');
+    Route::get('/barang', [EntriBarangController::class, 'index'])->name('barang');
+    Route::get('/order', [EntriOrderController::class, 'index'])->name('order');
+    Route::get('/transaksi', [EntriTransaksiController::class, 'index'])->name('transaksi');
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
 });

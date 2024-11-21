@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function login() {
+        if(auth()->guard('user')->check()) {
+            return redirect('/dashboard');
+        }
         return view('login');
     }
 
@@ -14,24 +17,42 @@ class AdminController extends Controller
         $request->validate([
             'username'=>'required',
             'password'=>'required',
+        ], [
+            'username.required' => 'Username harus diisi!',
+            'password.required' => 'Password harus diisi!'
         ]);
 
-        $request->session()->regenerate();
         $data_user = $request->only(['username','password']);
 
         if(auth()->guard('user')->attempt($data_user)){
+            $request->session()->regenerate();
             $user = auth()->guard('user')->user();
             $request->session()->put('user', $user);
             $request->session()->put('role', $user->role);
-            return redirect('/');
+            return redirect('dashboard')->with('success', 'Berhasil login!');
         } else {
-            return redirect('/login');
+            if(!auth()->guard('user')->attempt(['username' => $request->username])) {
+                return back()->withErrors([
+                    'username' => 'Username tidak ditemukan!'
+                ])->withInput($request->only('username'));
+            }
+            return back()->withErrors([
+                'password' => 'Password yang anda masukkan salah!'
+            ])->withInput($request->only('username'));
         }
     }
 
     public function logout(Request $request) {
         auth()->guard('user')->logout();
         $request->session()->invalidate();
-        return redirect('/login');
+        $request->session()->regenerateToken();
+        return redirect('/login')->with('success', 'Berhasil logout');
+    }
+
+    public function dashboardAdmin() {
+        if(!auth()->guard('user')->check()) {
+            return redirect('/login');
+        }
+        return view('dashboard');
     }
 }

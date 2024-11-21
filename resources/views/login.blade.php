@@ -47,7 +47,7 @@
             <h2 class="text-2xl font-bold mb-1 text-center text-teal-400" style="font-family: 'Poppins', sans-serif;">Selamat Datang</h2>
             <p class="text-gray-400 text-xs mb-8 text-center" style="font-family: 'Poppins', sans-serif;">Masukkan details anda untuk login</p>
 
-            {{-- @if ($errors->any())
+            @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <strong class="font-bold">Oops!</strong>
                 <span class="block sm:inline">{{ $errors->first('username') }}</span>
@@ -58,7 +58,7 @@
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <span class="block sm:inline">{{ session('success') }}</span>
             </div>
-            @endif --}}
+            @endif
 
             <form method="POST" action="">
                 @csrf
@@ -69,6 +69,10 @@
                 <div class="mb-8">
                     <label for="password" class="block text-teal-400 text-xs font-medium mb-1">Password</label>
                     <input type="password" id="password" name="password" placeholder="••••••••" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-xs text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-teal-400 transition-colors focus:border-teal-400 duration-300 focus:placeholder-teal-400 ease-in-out">
+                </div>
+                <div class="flex items-center mb-6">
+                    <input type="checkbox" id="remember" name="remember" class="w-4 h-4 bg-gray-700 border-gray-600 rounded focus:ring-teal-500 focus:ring-2 focus:ring-offset-gray-800">
+                    <label for="remember" class="ml-2 text-xs font-medium text-gray-400">Remember me</label>
                 </div>
                 <button type="submit" class="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 text-sm font-medium transition-colors duration-300 ease-in-out">Login</button>
             </form>

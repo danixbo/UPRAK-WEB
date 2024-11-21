@@ -5,27 +5,21 @@
 @endsection
 
 @section('title-halaman')
-    Dashboard Entri Order
+    Laporan
 @endsection
 
 @section('title')
-    <h1 class="text-xl font-semibold" style="font-family: 'Helvetica', 'Arial', sans-serif;">Entri Order</h1>
+    <h1 class="text-xl font-semibold" style="font-family: 'Helvetica', 'Arial', sans-serif;">Laporan</h1>
 @endsection
 
 @section('description')
-    <p class="text-gray-600" style="font-family: 'Helvetica', 'Arial', sans-serif;">Semua jumlah Entri Order muncul di bidang
+    <p class="text-gray-600" style="font-family: 'Helvetica', 'Arial', sans-serif;">Semua jumlah data laporan muncul di bidang
         ini</p>
 @endsection
 
 @section('content')
     <div class="rounded-lg">
-        <div class="flex justify-between items-center mb-6">
-            <a href="">
-                <button
-                    class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out">
-                    + Tambah Data
-                </button>
-            </a>
+        <div class="flex items-center mb-6">
             <div class="relative">
                 <input type="text" id="searchInput" placeholder="Search..."
                     class="bg-gray-700 text-gray-100 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 ease-in-out">
@@ -39,7 +33,7 @@
                 </button>
             </div>
         </div>
-        {{-- @if (session('success'))
+        @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <strong class="font-bold">Sukses!</strong>
                 <span class="block sm:inline">{{ session('success') }}</span>
@@ -51,7 +45,7 @@
                 <strong class="font-bold">Error!</strong>
                 <span class="block sm:inline">{{ session('error') }}</span>
             </div>
-        @endif --}}
+        @endif
 
         @if ($errors->any())
             <div class="bg-red-500 text-white p-4 rounded-md mb-4">
@@ -65,39 +59,46 @@
         <table class="w-full bg-gray-800 rounded-lg overflow-hidden">
             <thead class="bg-gray-700">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID Pesanan</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID Menu</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID Pelanggan</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Jumlah</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID User</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">NISN</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nama</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Alamat</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">No Telepon
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Kode Kelas
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Username</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Password</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-700">
                 {{-- @forelse ($siswa as $siswas)
                     <tr class="hover:bg-gray-700 transition-colors duration-200">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->id_pesanan }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->id_menu }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->id_pelanggan }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->jumlah }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->id_user }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->nisn }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->nama }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->alamat }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->no_telp }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->kode_kelas }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ $siswas->username }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                            <a href="{{ route('pages.siswa.edit', $siswas->id_pesanan) }}">
+                            {{ Str::limit(bcrypt($siswas->password), 15) }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                            <a href="{{ route('pages.siswa.edit', $siswas->nisn) }}">
                                 <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md mr-2">
                                     <i class="fa-solid fa-pencil"></i>
                                 </button>
                             </a>
-                            <button onclick="openDeleteModal('{{ $siswas->id_pesanan }}', '{{ $siswas->nama }}')" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md mr-2">
+                            <button onclick="openDeleteModal('{{ $siswas->nisn }}', '{{ $siswas->nama }}')" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md mr-2">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>
-                @empty
-                @endforelse --}}
-                <tr>
-                    <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-center">Tidak ada
-                        data Order</td>
-                </tr>
+                @empty --}}
+                    <tr>
+                        <td colspan="8" class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-center">Tidak ada
+                            data siswa</td>
+                    </tr>
+                {{-- @endforelse --}}
             </tbody>
         </table>
 
@@ -126,13 +127,13 @@
                         </div>
                     </div>
                     <div class="bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        {{-- <form id="deleteForm" method="POST">
-                            @csrf
+                        <form id="deleteForm" method="POST">
+                            {{-- @csrf
                             @method('DELETE')
                             <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
                                 Hapus
-                            </button>
-                        </form> --}}
+                            </button> --}}
+                        </form>
                         <button type="button" onclick="closeDeleteModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-500 shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-gray-300 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                             Batal
                         </button>
@@ -145,10 +146,10 @@
 
 @section('scripts')
 <script>
-    function openDeleteModal(id_pesanan, nama) {
+    function openDeleteModal(nisn, nama) {
         document.getElementById('deleteModal').classList.remove('hidden');
         document.getElementById('studentName').textContent = nama;
-        document.getElementById('deleteForm').action = "/" + id_pesanan;
+        document.getElementById('deleteForm').action = "/" + nisn;
     }
 
     function closeDeleteModal() {

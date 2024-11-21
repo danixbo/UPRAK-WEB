@@ -29,35 +29,56 @@
                 <div class="mx-4">
                     <h2 class="text-sm uppercase tracking-wider px-6 mb-2 font-medium text-teal-400">Main Menu</h2>
                     <ul class="space-y-2 px-4">
-                        <li><a href="" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
-                            <i class="fa-brands fa-microsoft w-6 mr-3 text-teal-400"></i>
+                        <li><a href="{{ route('dashboard') }}" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
+                            <i class="fa-solid fa-gauge w-6 mr-3 text-teal-400"></i>
                             <span class="font-semibold text-gray-100">Dashboard</span>
                         </a>
                     </li>
                     </ul>
                 </div>
+                @if(auth()->guard('user')->user()->role == 'admin' || auth()->guard('user')->user()->role == 'waiter' || auth()->guard('user')->user()->role == 'kasir')
                 <div class="mx-4">
                     <h2 class="text-sm uppercase tracking-wider px-6 mb-2 font-medium text-teal-400">Data Entri</h2>
                     <ul class="space-y-2 px-4">
-                        <li><a href="" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
-                                <i class="fa-solid fa-user-group w-6 mr-3 text-teal-400"></i>
+                        @if(auth()->guard('user')->user()->role == 'admin')
+                        <li><a href="{{ route('meja') }}" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
+                                <i class="fa-solid fa-table w-6 mr-3 text-teal-400"></i>
                                 <span class="font-semibold text-gray-100">Entri Meja</span>
                             </a></li>
-                        <li><a href="" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
-                                <i class="fas fa-book w-6 mr-3 text-teal-400"></i>
+                        @endif
+                        @if(auth()->guard('user')->user()->role == 'admin' || auth()->guard('user')->user()->role == 'waiter')
+                        <li><a href="{{ route('barang') }}" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
+                                <i class="fa-solid fa-box w-6 mr-3 text-teal-400"></i>
                                 <span class="font-semibold text-gray-100">Entri Barang</span>
                             </a></li>
-                        <li><a href="" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
-                                <i class="fa-solid fa-user-group w-6 mr-3 text-teal-400"></i>
-                                <span class="font-semibold text-gray-100">Entri Order</span>
-                            </a></li>
-                        <li><a href="" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
-                                <i class="fas fa-book w-6 mr-3 text-teal-400"></i>
+                        @endif
+                        {{-- @if(auth()->guard('user')->user()->role == 'waiter' || auth()->guard('user')->user()->role == 'owner') --}}
+                        @if(auth()->guard('user')->user()->role == 'waiter')
+                            <li><a href="{{ route('order') }}" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
+                                    <i class="fa-solid fa-clipboard-list w-6 mr-3 text-teal-400"></i>
+                                    <span class="font-semibold text-gray-100">Entri Order</span>
+                                </a></li>
+                        @endif
+                        @if(auth()->guard('user')->user()->role == 'kasir')
+                        <li><a href="{{ route('transaksi') }}" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
+                                <i class="fa-solid fa-money-bill-wave w-6 mr-3 text-teal-400"></i>
                                 <span class="font-semibold text-gray-100">Entri Transaksi</span>
+                            </a></li>
+                        @endif
+                    </ul>
+                </div>
+                @endif
+                @if(auth()->guard('user')->user()->role == 'owner' || auth()->guard('user')->user()->role == 'waiter' || auth()->guard('user')->user()->role == 'kasir')
+                <div class="mx-4">
+                    <h2 class="text-sm uppercase tracking-wider px-6 mb-2 font-medium text-teal-400">Generate</h2>
+                    <ul class="space-y-2 px-4">
+                        <li><a href="{{ route('laporan') }}" class="flex items-center p-2 hover:bg-gray-700 rounded-md transition duration-300 ease-in-out">
+                                <i class="fa-solid fa-file-lines w-6 mr-3 text-teal-400"></i>
+                                <span class="font-semibold text-gray-100">Laporan</span>
                             </a></li>
                     </ul>
                 </div>
-
+                @endif
             </div>
         </nav>
         <div class="py-4 px-4">
@@ -70,9 +91,6 @@
                             Logout
                         </button>
                     </form>
-                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-600">
-                        Profile
-                    </button>
                 </div>
                 <div class="flex items-center bg-gray-700 rounded-lg p-2 shadow-md cursor-pointer"
                     onclick="toggleDropdown()">
@@ -92,10 +110,10 @@
                 @yield('title')
                 @yield('description')
             </div>
-            <div class="mt-10 mb-20">
+            <div class="mb-20">
                 @yield('edit-tambah')
+                @yield('content')
             </div>
-            @yield('content')
         </div>
     </main>
 
