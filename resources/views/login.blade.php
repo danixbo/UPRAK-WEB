@@ -42,24 +42,93 @@
 <body class="flex items-center justify-center min-h-screen p-4">
     <div class="blob-container" id="blobContainer"></div>
 
+    @if (session('error'))
+    <div id="error-notification" class="fixed top-4 right-4 flex items-center p-4 bg-gray-800 border-l-4 border-red-500 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out opacity-0 translate-x-full">
+        <div class="flex items-center">
+            <div class="flex-shrink-0">
+                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-gray-200">
+                    <span class="font-bold mr-1">Oops!</span>{{ $errors->first('username') }}
+                    
+                </p>
+            </div>
+            <div class="ml-4 flex-shrink-0 flex">
+                <button onclick="closeNotification()" class="inline-flex text-gray-400 hover:text-gray-300 focus:outline-none">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    @if (session('success'))
+    <div id="success-notification" class="fixed top-4 right-4 flex items-center p-4 bg-gray-800 border-l-4 border-green-500 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out opacity-0 translate-x-full">
+        <div class="flex items-center">
+            <div class="flex-shrink-0">
+                <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-gray-200">
+                    {{ session('success') }}
+                </p>
+            </div>
+            <div class="ml-4 flex-shrink-0 flex">
+                <button onclick="closeNotification()" class="inline-flex text-gray-400 hover:text-gray-300 focus:outline-none">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const errorNotification = document.getElementById('error-notification');
+            const successNotification = document.getElementById('success-notification');
+            
+            function showNotification(element) {
+                if (element) {
+                    setTimeout(() => {
+                        element.classList.remove('opacity-0', 'translate-x-full');
+                    }, 100);
+
+                    setTimeout(() => {
+                        closeNotification(element);
+                    }, 5000);
+                }
+            }
+
+            showNotification(errorNotification);
+            showNotification(successNotification);
+        });
+
+        function closeNotification(element) {
+            if (!element) {
+                element = event.target.closest('[id$="-notification"]');
+            }
+            if (element) {
+                element.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => {
+                    element.remove();
+                }, 500);
+            }
+        }
+    </script>
+    @endif
+
     <div class="content-wrapper flex justify-center items-center min-h-screen">
         <div class="bg-gray-800 bg-opacity-80 backdrop-blur-lg py-8 px-5 rounded-lg shadow-xl relative z-10">
             <h2 class="text-2xl font-bold mb-1 text-center text-teal-400" style="font-family: 'Poppins', sans-serif;">Selamat Datang</h2>
             <p class="text-gray-400 text-xs mb-8 text-center" style="font-family: 'Poppins', sans-serif;">Masukkan details anda untuk login</p>
-
-            @if ($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <strong class="font-bold">Oops!</strong>
-                <span class="block sm:inline">{{ $errors->first('username') }}</span>
-            </div>
-            @endif
-
-            @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <span class="block sm:inline">{{ session('success') }}</span>
-            </div>
-            @endif
-
             <form method="POST" action="">
                 @csrf
                 <div class="mb-4">

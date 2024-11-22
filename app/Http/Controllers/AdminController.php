@@ -32,13 +32,11 @@ class AdminController extends Controller
             return redirect('dashboard')->with('success', 'Berhasil login!');
         } else {
             if(!auth()->guard('user')->attempt(['username' => $request->username])) {
-                return back()->withErrors([
-                    'username' => 'Username tidak ditemukan!'
-                ])->withInput($request->only('username'));
+                session()->put('errors', collect(['username' => 'Username tidak ditemukan!']));
+                return back()->withInput($request->only('username'));
             }
-            return back()->withErrors([
-                'password' => 'Password yang anda masukkan salah!'
-            ])->withInput($request->only('username'));
+            session()->put('errors', collect(['password' => 'Password yang anda masukkan salah!']));
+            return back()->withInput($request->only('username'));
         }
     }
 

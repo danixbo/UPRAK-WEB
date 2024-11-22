@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-@if(session('error'))
+    @if(session('error'))
 <div id="error-notification" class="fixed top-4 right-4 flex items-center p-4 bg-gray-800 border-l-4 border-red-500 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out opacity-0 translate-x-full">
     <div class="flex items-center">
         <div class="flex-shrink-0">

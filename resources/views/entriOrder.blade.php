@@ -17,6 +17,85 @@
         ini</p>
 @endsection
 
+@section('edit-tambah')
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            @if(session('success'))
+                <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="bg-red-500 text-white p-4 rounded-md mb-4">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="" method="POST">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="id_pesanan">
+                            ID Pesanan
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="id_pesanan" name="id_pesanan" type="number" placeholder="" required readonly>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="id_menu">
+                            ID Menu
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="id_menu" name="id_menu" type="text" placeholder="1234567890" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="id_pelanggan">
+                            ID Pelanggan
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="id_pelanggan" name="id_pelanggan" type="text" placeholder="1234567890" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="jumlah">
+                            Jumlah
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="jumlah" name="jumlah" type="number" placeholder="1" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 text-sm font-semibold mb-2" for="id_user">
+                            ID User
+                        </label>
+                        <input
+                            class="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-200"
+                            id="id_user" name="id_user" type="text" placeholder="1234567890" required readonly>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 mt-8">
+                    <button
+                        class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                        type="submit">
+                        Simpan Data
+                    </button>
+                    <button
+                        class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                        type="reset">
+                        Mulai Ulang
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="rounded-lg">
         <div class="flex justify-between items-center mb-6">
